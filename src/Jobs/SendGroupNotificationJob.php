@@ -62,14 +62,14 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
 
                 Cache::tags($tag)->flush();
 
-                $sendSlack    = $dataFromCache[ 'send_slack' ];
-                $channelSlack = $dataFromCache[ 'channel_slack' ];
+                $sendSlack    = $dataFromCache[ 'send_slack' ] ?? null;
+                $channelSlack = $dataFromCache[ 'channel_slack' ] ?? null;
                 if ($sendSlack === true) {
                     Notification::route('slack', $channelSlack)
                         ->notify(new ErrorSlackNotification($dataFromCache));
                 }
 
-                $sendMail = $dataFromCache[ 'send_mail' ];
+                $sendMail = $dataFromCache[ 'send_mail' ] ?? null;
                 if ($sendMail === true) {
                     TrySendMailService::execute($dataFromCache);
                 }

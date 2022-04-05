@@ -51,7 +51,7 @@ protected $commands = [
 ];
 
 
-$schedule->command('exception-notification:queue')
+$schedule->command('error-notification:send-group-notification')
     ->withoutOverlapping()
     ->everyFiveMinutes()
     ->sendOutputTo('/dev/stdout');

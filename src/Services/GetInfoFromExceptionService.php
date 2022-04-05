@@ -18,13 +18,14 @@ class GetInfoFromExceptionService
     public static function execute($exception, $extraValues = []): array
     {
         $request      = request();
+        $message = empty($exception->getMessage()) ? "-" : $exception->getMessage();
         $infoEndpoint = [
-            'message_error' => $exception->getMessage(),
+            'message_error' => $message,
             'uri'           => $request->getRequestUri(),
             'method'        => $request->method(),
             'user'          => Auth::id(),
         ];
-    
+
         foreach (config('error-notification.get_special_values_from_header') as $key => $item) {
             if ($request->$item) {
                 $infoEndpoint[ $key ] = $request->header($item);
@@ -35,26 +36,26 @@ class GetInfoFromExceptionService
                 $infoEndpoint[ $key ] = $request->$item;
             }
         }
-        
+
         $infoEndpoint[ 'environment' ]    = env('APP_ENV');
         $infoEndpoint[ 'code' ]           = $exception->getCode();
         $infoEndpoint[ 'line' ]           = $exception->getLine();
         $infoEndpoint[ 'file' ]           = $exception->getFile();
         $infoEndpoint[ 'name_exception' ] = get_class($exception);
         $infoEndpoint[ 'count_errors' ]   = 1;
-        
+
         $headers = GetAllValuesFromHeaderService::execute($request);
-        
+
         $infoEndpoint = array_merge($infoEndpoint, $headers->toArray());
-        
+
         $infoEndpoint = array_merge($infoEndpoint, $extraValues);
-        
+
         if (array_key_exists('authorization', $infoEndpoint)) {
             $authorization = $infoEndpoint[ 'authorization' ];
             unset($infoEndpoint[ 'authorization' ]);
             $infoEndpoint[ 'authorization' ] = $authorization;
         }
-        
+
         return $infoEndpoint;
     }
 }

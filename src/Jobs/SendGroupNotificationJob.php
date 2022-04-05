@@ -44,37 +44,37 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
 
             $nameCache     = "list_exception_" . config('error-notification.cache-name');
             $tag           = "list_exception_" . config('error-notification.cache-tag-name');
-            $dataFromCache = Cache::tags($tag)
-                ->get($nameCache);
+            $dataFromCache = Cache::tags($tag)->get($nameCache);
             if ($dataFromCache === null) {
                 return;
             }
-            foreach ($dataFromCache as $nameException) {
-                $nameCache = env('APP_NAME');
-                $nameCache .= "_" . config('error-notification.cache-name');
-                $nameCache .= "_" . $nameException;
-                $tag       = config('error-notification.cache-tag-name');
 
-                $dataFromCache = Cache::tags($tag)->get($nameCache."_slack");
-                if ($dataFromCache === null) {
+            $tagItem = config('error-notification.cache-tag-name');
+            foreach ($dataFromCache as $nameException) {
+                $nameCacheItem = env('APP_NAME');
+                $nameCacheItem .= "_" . config('error-notification.cache-name');
+                $nameCacheItem .= "_" . $nameException;
+
+                $dataFromCacheItem = Cache::tags($tagItem)->get($nameCacheItem."_slack");
+                if ($dataFromCacheItem === null) {
                     continue;
                 }
 
-                Cache::tags($tag)->flush();
-
-                $sendSlack    = $dataFromCache[ 'send_slack' ] ?? null;
-                $channelSlack = $dataFromCache[ 'channel_slack' ] ?? null;
+                $sendSlack    = $dataFromCacheItem[ 'send_slack' ] ?? null;
+                $channelSlack = $dataFromCacheItem[ 'channel_slack' ] ?? null;
                 if ($sendSlack === true) {
                     Notification::route('slack', $channelSlack)
-                        ->notify(new ErrorSlackNotification($dataFromCache));
+                        ->notify(new ErrorSlackNotification($dataFromCacheItem));
                 }
 
-                $dataFromCache = Cache::tags($tag)->get($nameCache."_email");
-                $sendMail = $dataFromCache[ 'send_mail' ] ?? null;
+                $dataFromCacheItem = Cache::tags($tagItem)->get($nameCacheItem."_email");
+                $sendMail = $dataFromCacheItem[ 'send_mail' ] ?? null;
                 if ($sendMail === true) {
-                    TrySendMailService::execute($dataFromCache);
+                    TrySendMailService::execute($dataFromCacheItem);
                 }
             }
+            Cache::tags($tagItem)->flush();
+            Cache::tags($tag)->flush();
 
             $array = [ 'message' => "finish " . __CLASS__ . " " ];
             $sendLogConsoleService->execute(

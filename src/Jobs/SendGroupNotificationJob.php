@@ -50,9 +50,12 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
                 return;
             }
             foreach ($dataFromCache as $nameException) {
+                $nameCache = env('APP_NAME');
+                $nameCache .= "_" . config('error-notification.cache-name');
+                $nameCache .= "_" . $nameException;
                 $tag       = config('error-notification.cache-tag-name');
 
-                $dataFromCache = Cache::tags($tag)->get($nameException);
+                $dataFromCache = Cache::tags($tag)->get($nameCache."_slack");
                 if ($dataFromCache === null) {
                     continue;
                 }
@@ -66,6 +69,7 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
                         ->notify(new ErrorSlackNotification($dataFromCache));
                 }
 
+                $dataFromCache = Cache::tags($tag)->get($nameCache."_email");
                 $sendMail = $dataFromCache[ 'send_mail' ] ?? null;
                 if ($sendMail === true) {
                     TrySendMailService::execute($dataFromCache);

@@ -15,7 +15,7 @@ class CatchNotificationService
      * @param array $context
      * @return void
      */
-    public static function execute(array $context = []): void
+    public static function error(array $context = []): void
     {
         /** @var Exception $exception */
         $exception = $context[ 'exception' ];

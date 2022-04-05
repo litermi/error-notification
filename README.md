@@ -39,7 +39,22 @@ php artisan vendor:publish --provider="Cirelramos\ErrorNotification\Providers\Se
 ## Usage
 
 ```php
+SendEmailNotificationService::execute($exception, $directNotification);
+SendSlackNotificationService::execute($exception, $directNotification, $channelSlack);
+```
 
+in app/Console/Kernel.php add
+```php
+
+protected $commands = [
+    SendGroupNotificationScheduler::class,
+];
+
+
+$schedule->command('exception-notification:queue')
+    ->withoutOverlapping()
+    ->everyFiveMinutes()
+    ->sendOutputTo('/dev/stdout');
 ```
 
 

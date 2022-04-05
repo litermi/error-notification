@@ -16,8 +16,6 @@ class ErrorNotificationService
         bool $mail = true,
         bool $directNotification = true
     ): void {
-    
-        SendEmailNotificationService::execute($exception, $directNotification);
-        SendSlackNotificationService::execute($exception, $directNotification, $channelSlack);
+
     }
 }

@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Core\Base\Services;
+namespace Cirelramos\ErrorNotification\Services;
 
-use Cirelramos\ErrorNotification\Services\SendEmailNotificationService;
-use Cirelramos\ErrorNotification\Services\SendSlackNotificationService;
 use Cirelramos\Logs\Services\SendLogConsoleService;
 use Exception;
 use Illuminate\Http\Response;

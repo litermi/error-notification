@@ -50,9 +50,9 @@ class ExceptionEmailNotification extends Notification implements ShouldQueue
         $environment = array_key_exists('environment', $data) ? $data['environment'] : 'empty environment';
         $messageError = array_key_exists('message_error', $data) ? $data['message_error'] : '';
         $subject = "ENV:$environment 👀 / {$messageError}";
-
-        $view = 'emails.alert_mails';
-
+    
+        $view = config('error-notification.view-alert-email');
+    
         return (new MailMessage())
             ->subject($subject)
             ->markdown($view, $this->data);

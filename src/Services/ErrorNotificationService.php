@@ -6,10 +6,9 @@ class ErrorNotificationService
 {
     /**
      * @param             $exception
-     * @param null        $type
      * @param string|null $channelSlack
      * @param bool        $mail
-     * @param bool        $directSlackNotification
+     * @param bool        $directNotification
      */
     public function sendErrorNotification(
         $exception,

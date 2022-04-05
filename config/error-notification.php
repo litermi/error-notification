@@ -33,7 +33,7 @@ return [
      * view/template alert email
      * example:
      */
-    'view-alert-email' => "",
+    'view-alert-email' => "templates.emails",
 
     /*
      * cache tag name
@@ -54,13 +54,11 @@ return [
      */
     'cache-name' => "default_name_cache",
 
-
-
     /*
      * mail recipient notification error
      * example:
      */
-    'mail-recipient' => "",
+    'mail-recipient' => "yourmail@gmail.com",
 
     /*
      * default channel slack

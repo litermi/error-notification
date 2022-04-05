@@ -50,12 +50,9 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
                 return;
             }
             foreach ($dataFromCache as $nameException) {
-                $nameCache = env('APP_NAME');
-                $nameCache .= "_" . config('error-notification.cache-name');
-                $nameCache .= "_" . $nameException;
                 $tag       = config('error-notification.cache-tag-name');
 
-                $dataFromCache = Cache::tags($tag)->get($nameCache);
+                $dataFromCache = Cache::tags($tag)->get($nameException);
                 if ($dataFromCache === null) {
                     continue;
                 }

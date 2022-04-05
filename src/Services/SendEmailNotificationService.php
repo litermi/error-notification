@@ -21,10 +21,10 @@ class SendEmailNotificationService
         $infoEndpoint = GetInfoFromExceptionService::execute($exception);
         $infoEndpoint['send_mail'] = true;
         if ($directNotification === false) {
-            GroupNotificationService::execute($infoEndpoint);
+            GroupNotificationService::execute( $infoEndpoint, "email" );
             return false;
         }
-        
+
         try {
             TrySendMailService::execute($infoEndpoint);
         }
@@ -33,7 +33,7 @@ class SendEmailNotificationService
             $sendLogConsoleService = new SendLogConsoleService();
             $sendLogConsoleService->execute('error:' . $exception->getMessage(), $infoEndpoint);
         }
-        
+
         return false;
     }
 }

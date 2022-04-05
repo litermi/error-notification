@@ -29,7 +29,7 @@ class SendSlackNotificationService
         $infoEndpoint['send_slack'] = true;
         $infoEndpoint['channel_slack'] = $channelSlack;
         if ($directNotification === false) {
-            GroupNotificationService::execute( $infoEndpoint );
+            GroupNotificationService::execute( $infoEndpoint, "slack" );
             return false;
         }
         try {
@@ -44,7 +44,7 @@ class SendSlackNotificationService
                 $infoEndpoint
             );
         }
-        
+
         return false;
     }
 }

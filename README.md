@@ -6,6 +6,7 @@
 
 The `Error Notification` is a package to send notification when has an error .
 
+##### [Tutorial how create composer package](https://cirelramos.blogspot.com/2022/04/how-create-composer-package.html)
 
 ## Installation
 

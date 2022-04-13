@@ -1,5 +1,5 @@
 {
-    "name": "cirelramos/error-notification",
+    "name": "litermi/error-notification",
     "description": "The Error Notification is a package to send notification when has an error",
     "type": "library",
     "license": "MIT",
@@ -19,11 +19,11 @@
         "illuminate/notifications": "^7.20|^8.19|^9.0",
         "laravel/slack-notification-channel": "^2.3",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
-        "cirelramos/logs": "^1.0"
+        "litermi/logs": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "Cirelramos\\ErrorNotification\\": "src/"
+            "Litermi\\ErrorNotification\\": "src/"
         }
     },
     "extra": {

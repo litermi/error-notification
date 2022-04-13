@@ -10,9 +10,9 @@ The `Error Notification` is a package to send notification when has an error .
 
 ## Installation
 
-Require the `cirelramos/error-notification` package in your `composer.json` and update your dependencies:
+Require the `litermi/error-notification` package in your `composer.json` and update your dependencies:
 ```sh
-composer require cirelramos/error-notification
+composer require litermi/error-notification
 ```
 
 
@@ -23,14 +23,14 @@ set provider
 ```php
 'providers' => [
     // ...
-    Cirelramos\ErrorNotification\Providers\ServiceProvider::class,
+    Litermi\ErrorNotification\Providers\ServiceProvider::class,
 ],
 ```
 
 
 The defaults are set in `config/error-notification.php`. Publish the config to copy the file to your own config:
 ```sh
-php artisan vendor:publish --provider="Cirelramos\ErrorNotification\Providers\ServiceProvider"
+php artisan vendor:publish --provider="Litermi\ErrorNotification\Providers\ServiceProvider"
 ```
 
 > **Note:** this is necessary to you can change default config

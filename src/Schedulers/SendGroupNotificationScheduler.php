@@ -1,10 +1,10 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Schedulers;
+namespace Litermi\ErrorNotification\Schedulers;
 
-use Cirelramos\ErrorNotification\Jobs\SendGroupNotificationJob;
-use Cirelramos\ErrorNotification\Services\GetInfoFromExceptionService;
-use Cirelramos\Logs\Services\SendLogConsoleService;
+use Litermi\ErrorNotification\Jobs\SendGroupNotificationJob;
+use Litermi\ErrorNotification\Services\GetInfoFromExceptionService;
+use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
 use Illuminate\Console\Command;
 

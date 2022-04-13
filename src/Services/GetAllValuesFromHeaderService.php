@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Services;
+namespace Litermi\ErrorNotification\Services;
 
 use Illuminate\Support\Collection;
 
@@ -17,10 +17,10 @@ class GetAllValuesFromHeaderService
     {
         $headers = $request->headers->all();
         $headers = collect($headers);
-        
+
         return $headers->map(self::mapReplaceGetValuesHeaders());
     }
-    
+
     private static function mapReplaceGetValuesHeaders(): callable
     {
         return static function ($header, $key) {

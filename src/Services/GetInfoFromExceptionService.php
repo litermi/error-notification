@@ -1,8 +1,8 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Services;
+namespace Litermi\ErrorNotification\Services;
 
-use Cirelramos\ErrorNotification\Services\GetAllValuesFromHeaderService;
+use Litermi\ErrorNotification\Services\GetAllValuesFromHeaderService;
 use Illuminate\Support\Facades\Auth;
 
 /**

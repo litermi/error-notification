@@ -1,8 +1,8 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Services;
+namespace Litermi\ErrorNotification\Services;
 
-use Cirelramos\Logs\Services\SendLogConsoleService;
+use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
 
 /**

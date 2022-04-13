@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Notifications;
+namespace Litermi\ErrorNotification\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

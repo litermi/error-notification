@@ -1,9 +1,9 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Services;
+namespace Litermi\ErrorNotification\Services;
 
-use Cirelramos\ErrorNotification\Notifications\ErrorSlackNotification;
-use Cirelramos\Logs\Services\SendLogConsoleService;
+use Litermi\ErrorNotification\Notifications\ErrorSlackNotification;
+use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
 use Illuminate\Support\Facades\Notification;
 

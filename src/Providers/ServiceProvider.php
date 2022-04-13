@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Providers;
+namespace Litermi\ErrorNotification\Providers;
 
 /**
  *
@@ -17,12 +17,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishConfig();
         $this->publishMigrations();
     }
-    
+
     private function mergeConfig()
     {
         $this->mergeConfigFrom($this->getConfigPath(), 'error-notification');
     }
-    
+
     private function publishConfig()
     {
         // Publish a config file

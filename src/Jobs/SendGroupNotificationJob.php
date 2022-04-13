@@ -1,11 +1,11 @@
 <?php
 
-namespace Cirelramos\ErrorNotification\Jobs;
+namespace Litermi\ErrorNotification\Jobs;
 
-use Cirelramos\ErrorNotification\Notifications\ErrorSlackNotification;
-use Cirelramos\ErrorNotification\Services\CatchNotificationService;
-use Cirelramos\ErrorNotification\Services\TrySendMailService;
-use Cirelramos\Logs\Services\SendLogConsoleService;
+use Litermi\ErrorNotification\Notifications\ErrorSlackNotification;
+use Litermi\ErrorNotification\Services\CatchNotificationService;
+use Litermi\ErrorNotification\Services\TrySendMailService;
+use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;

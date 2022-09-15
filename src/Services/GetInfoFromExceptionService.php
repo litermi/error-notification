@@ -2,8 +2,8 @@
 
 namespace Litermi\ErrorNotification\Services;
 
-use Litermi\ErrorNotification\Services\GetAllValuesFromHeaderService;
 use Illuminate\Support\Facades\Auth;
+use Litermi\Logs\Services\GetTrackerService;
 
 /**
  *
@@ -15,7 +15,7 @@ class GetInfoFromExceptionService
      * @param array $extraValues
      * @return array
      */
-    public static function execute($exception, $extraValues = []): array
+    public static function execute($exception, $extraValues = [], $enableTracker = true): array
     {
         $request      = request();
         $message = empty($exception->getMessage()) ? "-" : $exception->getMessage();
@@ -41,6 +41,9 @@ class GetInfoFromExceptionService
         $infoEndpoint[ 'code' ]           = $exception->getCode();
         $infoEndpoint[ 'line' ]           = $exception->getLine();
         $infoEndpoint[ 'file' ]           = $exception->getFile();
+        if ($enableTracker === true) {
+            $infoEndpoint[ 'tracker' ] = GetTrackerService::execute($exception->getTrace());
+        }
         $infoEndpoint[ 'name_exception' ] = get_class($exception);
         $infoEndpoint[ 'count_errors' ]   = 1;
 

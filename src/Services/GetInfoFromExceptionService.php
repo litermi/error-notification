@@ -42,7 +42,8 @@ class GetInfoFromExceptionService
         $infoEndpoint[ 'line' ]           = $exception->getLine();
         $infoEndpoint[ 'file' ]           = $exception->getFile();
         if ($enableTracker === true) {
-            $infoEndpoint[ 'tracker' ] = GetTrackerService::execute($exception->getTrace());
+            $tracker = GetTrackerService::execute($exception->getTrace());
+            $infoEndpoint[ 'tracker' ] = $tracker->toJson();
         }
         $infoEndpoint[ 'name_exception' ] = get_class($exception);
         $infoEndpoint[ 'count_errors' ]   = 1;

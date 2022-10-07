@@ -20,6 +20,8 @@ class GetTrackerService
             $tracker = $tracker->filter( self::filterHasRoute() );
             $tracker = $tracker->map( self::mapRemoveExtraElement() );
             $tracker = $tracker->values();
+            $tracker = $tracker->toJson();
+            $tracker = str_replace("\\", "", $tracker);
         }catch (\Exception $exception){
             return collect(['error_tracker' => $exception->getMessage(), 'line' => $exception->getLine()]);
         }

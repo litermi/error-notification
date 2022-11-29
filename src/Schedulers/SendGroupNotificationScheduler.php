@@ -18,13 +18,13 @@ class SendGroupNotificationScheduler extends Command
      *
      * @var string
      */
-    protected $signature = 'error-notification:send-group-notification';
+    protected $signature = 'scheduler_project:error-notification-send-group';
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Process to send group notification';
+    protected $description = 'Process to send group notification, php artisan scheduler_project:error-notification-send-group';
 
     /**
      * Create a new command instance.

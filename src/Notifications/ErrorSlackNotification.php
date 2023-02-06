@@ -50,7 +50,7 @@ class ErrorSlackNotification extends Notification implements ShouldQueue
         $environment  = array_key_exists('environment', $data) ? $data[ 'environment' ] : env('APP_ENV');
         $countError   = array_key_exists('count_errors', $data) ? $data[ 'count_errors' ] : 0;
         $messageError = array_key_exists('message_error', $data) ? $data['message_error'] : '';
-        $title        = "ENV:$environment :eyes: ERRORS:{$countError} :fire: {$messageError}";
+        $title        = "ENV:$environment :eyes: ERRORS:{$countError} :fire: {$messageError}" . " / Exception in: ".env('APP_NAME')." ";
         return (new SlackMessage)
             ->success()
             ->content($title)

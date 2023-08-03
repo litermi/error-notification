@@ -38,11 +38,9 @@ class SendSlackNotificationService
             return false;
         }
         try {
-            var_dump("SEEEEND");
             Notification::route('slack', $channelSlack)
                 ->notify(new ErrorSlackNotification($infoEndpoint));
         } catch (Exception $exception) {
-            var_dump("SEEEEND 1.2");
             $infoEndpoint          = GetInfoFromExceptionService::execute($exception);
             $sendLogConsoleService = new SendLogConsoleService();
             $sendLogConsoleService->execute(

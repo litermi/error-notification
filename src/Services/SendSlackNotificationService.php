@@ -34,8 +34,10 @@ class SendSlackNotificationService
         $infoEndpoint['send_slack']    = true;
         $infoEndpoint['channel_slack'] = $channelSlack;
         if ($directNotification === false) {
-            GroupNotificationService::execute($infoEndpoint, "slack");
-            return false;
+            if (config('error-notification.direct-notification', false) === false) {
+                GroupNotificationService::execute($infoEndpoint, "slack");
+                return false;
+            }
         }
         try {
             Notification::route('slack', $channelSlack)

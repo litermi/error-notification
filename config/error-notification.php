@@ -65,5 +65,7 @@ return [
      * example:
      */
     'default-channel-slack' => "",
+
+    'direct-notification' => false,
 ];
 

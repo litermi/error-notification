@@ -27,8 +27,10 @@ class SendEmailNotificationService
         }
         $infoEndpoint['send_mail'] = true;
         if ($directNotification === false) {
-            GroupNotificationService::execute( $infoEndpoint, "email" );
-            return false;
+            if (config('error-notification.direct-notification', false) === false) {
+                GroupNotificationService::execute($infoEndpoint, "email");
+                return false;
+            }
         }
 
         try {

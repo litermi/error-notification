@@ -4,6 +4,8 @@ namespace Litermi\ErrorNotification\Jobs;
 
 use Litermi\ErrorNotification\Notifications\ErrorSlackNotification;
 use Litermi\ErrorNotification\Services\CatchNotificationService;
+use Litermi\ErrorNotification\Services\SendEmailNotificationService;
+use Litermi\ErrorNotification\Services\SendSlackNotificationService;
 use Litermi\ErrorNotification\Services\TrySendMailService;
 use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
@@ -63,14 +65,21 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
                 $sendSlack    = $dataFromCacheItem[ 'send_slack' ] ?? null;
                 $channelSlack = $dataFromCacheItem[ 'channel_slack' ] ?? null;
                 if ($sendSlack === true) {
-                    Notification::route('slack', $channelSlack)
-                        ->notify(new ErrorSlackNotification($dataFromCacheItem));
+                    SendSlackNotificationService::execute(
+                                            $dataFromCacheItem,
+                        directNotification: true,
+                        isArrayException  : true
+                    );
                 }
 
                 $dataFromCacheItem = Cache::tags($tagItem)->get($nameCacheItem."_email");
                 $sendMail = $dataFromCacheItem[ 'send_mail' ] ?? null;
                 if ($sendMail === true) {
-                    TrySendMailService::execute($dataFromCacheItem);
+                    SendEmailNotificationService::execute(
+                                            $dataFromCacheItem,
+                        directNotification: true,
+                        isArrayException  : true
+                    );
                 }
             }
             Cache::tags($tagItem)->flush();

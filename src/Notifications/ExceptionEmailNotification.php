@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 /**
  *
  */
-class ExceptionEmailNotification extends Notification implements ShouldQueue
+class ExceptionEmailNotification extends Notification
 {
 
     use Queueable;

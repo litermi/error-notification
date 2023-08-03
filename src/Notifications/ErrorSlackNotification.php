@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 /**
  *
  */
-class ErrorSlackNotification extends Notification implements ShouldQueue
+class ErrorSlackNotification extends Notification
 {
     use Queueable;
 

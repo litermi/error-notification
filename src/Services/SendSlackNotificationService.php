@@ -21,22 +21,28 @@ class SendSlackNotificationService
     public static function execute(
         $exception,
         bool $directNotification = false,
-        $channelSlack = null
-    ):
-    ?bool {
-        $infoEndpoint = GetInfoFromExceptionService::execute($exception);
-        $channelSlack = $channelSlack ?? config('error-notification.default-channel-slack');
-        $infoEndpoint['send_slack'] = true;
+        $channelSlack = null,
+        $isArrayException = false
+    ): bool {
+        if ($isArrayException == false) {
+            $infoEndpoint = GetInfoFromExceptionService::execute($exception);
+        }
+        if ($isArrayException == true) {
+            $infoEndpoint = $exception;
+        }
+        $channelSlack                  = $channelSlack ?? config('error-notification.default-channel-slack');
+        $infoEndpoint['send_slack']    = true;
         $infoEndpoint['channel_slack'] = $channelSlack;
         if ($directNotification === false) {
-            GroupNotificationService::execute( $infoEndpoint, "slack" );
+            GroupNotificationService::execute($infoEndpoint, "slack");
             return false;
         }
         try {
+            var_dump("SEEEEND");
             Notification::route('slack', $channelSlack)
                 ->notify(new ErrorSlackNotification($infoEndpoint));
-        }
-        catch(Exception $exception) {
+        } catch (Exception $exception) {
+            var_dump("SEEEEND 1.2");
             $infoEndpoint          = GetInfoFromExceptionService::execute($exception);
             $sendLogConsoleService = new SendLogConsoleService();
             $sendLogConsoleService->execute(

@@ -45,7 +45,7 @@ class SendGroupNotificationScheduler extends Command
     {
         try {
             $job = new SendGroupNotificationJob();
-            dispatch($job)->onQueue(config('queue-names.general'));
+            dispatch_sync($job);
         }
         catch(Exception $exception) {
             $infoEndpoint          = GetInfoFromExceptionService::execute($exception);

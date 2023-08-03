@@ -16,9 +16,15 @@ class SendEmailNotificationService
      */
     public static function execute(
         $exception,
-        bool $directNotification = false
+        bool $directNotification = false,
+        $isArrayException=false
     ): bool {
-        $infoEndpoint = GetInfoFromExceptionService::execute($exception);
+        if($isArrayException==false){
+            $infoEndpoint = GetInfoFromExceptionService::execute($exception);
+        }
+        if($isArrayException==true){
+            $infoEndpoint=$exception;
+        }
         $infoEndpoint['send_mail'] = true;
         if ($directNotification === false) {
             GroupNotificationService::execute( $infoEndpoint, "email" );

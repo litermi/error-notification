@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0577b38432d00c8dba101b014b23add3",
+    "content-hash": "8f6ceb190249334834ec7631c58a4733",
     "packages": [
         {
             "name": "brick/math",
@@ -3414,12 +3414,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "e9b3aef11d4f06c4fc11a0aa157b8d89002ce11f"
+                "reference": "1f85b37c66ab468f91831a4baaf529b97be11530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/e9b3aef11d4f06c4fc11a0aa157b8d89002ce11f",
-                "reference": "e9b3aef11d4f06c4fc11a0aa157b8d89002ce11f",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/1f85b37c66ab468f91831a4baaf529b97be11530",
+                "reference": "1f85b37c66ab468f91831a4baaf529b97be11530",
                 "shasum": ""
             },
             "require": {
@@ -3499,7 +3499,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-29T21:45:12+00:00"
+            "time": "2024-05-06T21:16:32+00:00"
         },
         {
             "name": "symfony/console",

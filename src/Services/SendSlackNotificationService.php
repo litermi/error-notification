@@ -2,10 +2,10 @@
 
 namespace Litermi\ErrorNotification\Services;
 
-use Litermi\ErrorNotification\Notifications\ErrorSlackNotification;
-use Litermi\Logs\Services\SendLogConsoleService;
 use Exception;
 use Illuminate\Support\Facades\Notification;
+use Litermi\ErrorNotification\Notifications\ErrorSlackNotification;
+use Litermi\Logs\Services\SendLogConsoleService;
 
 /**
  *
@@ -30,6 +30,11 @@ class SendSlackNotificationService
         if ($isArrayException == true) {
             $infoEndpoint = $exception;
         }
+
+        if (is_array($infoEndpoint) && array_key_exists('tracker', $infoEndpoint) == true) {
+            $infoEndpoint['tracker'] = self::printArrayRecursive($infoEndpoint['tracker']);
+        }
+
         $channelSlack                  = $channelSlack ?? config('error-notification.default-channel-slack');
         $infoEndpoint['send_slack']    = true;
         $infoEndpoint['channel_slack'] = $channelSlack;
@@ -53,4 +58,44 @@ class SendSlackNotificationService
 
         return false;
     }
+
+    public static function printArrayRecursive($data, $indent = 0)
+    {
+        $stringToReturn = "";
+        if (is_array($data) == false) {
+            return $data;
+        }
+
+        foreach ($data as $key => $value) {
+            // Indent the output for readability
+            $indentStr = "" . str_repeat('  ', $indent);
+
+            // If the value is an array, recurse
+            if (is_array($value)) {
+                $textKey = "$indentStr$key:";
+                if (is_int($key) == true) {
+                    $textKey = "";
+                }
+                if ($indent == 0) {
+                    $stringToReturn .= "\n\n\n";
+                }
+                if ($indent == 1) {
+                    $stringToReturn .= "\n";
+                }
+
+                if ($indent == 0) {
+                    $stringToReturn .= "$textKey";
+                } else {
+                    $stringToReturn .= "$textKey";
+                }
+                $stringToReturn .= self::printArrayRecursive($value, $indent + 1);
+            } else {
+                // Otherwise, print the key-value pair
+                $stringToReturn .= "$indentStr$key: $value \n";
+            }
+        }
+
+        return $stringToReturn;
+    }
+
 }

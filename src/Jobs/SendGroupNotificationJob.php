@@ -68,6 +68,7 @@ class SendGroupNotificationJob implements ShouldQueue, ShouldBeUnique
                     SendSlackNotificationService::execute(
                                             $dataFromCacheItem,
                         directNotification: true,
+                        channelSlack      : $channelSlack,
                         isArrayException  : true
                     );
                 }
